@@ -1,38 +1,318 @@
-.App {
-  text-align: center;
+/* ===== Base ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #e8f0fe;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app-bg {
   min-height: 100vh;
+  background: linear-gradient(135deg, #1a237e 0%, #1565c0 50%, #0288d1 100%);
+  padding: 32px 16px;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ===== Header ===== */
+.header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-bottom: 24px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header-icon { font-size: 40px; }
+
+.header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: white;
+}
+
+.header p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ===== Search Card ===== */
+.search-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  margin-bottom: 24px;
+}
+
+.search-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus { border-color: #1565c0; }
+
+/* ===== Toggle ===== */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #ddd;
+  background: #f5f5f5;
+  transition: all 0.2s;
+}
+
+.toggle input { display: none; }
+
+.toggle-slider {
+  width: 36px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 20px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.toggle-slider::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: left 0.2s;
+}
+
+.toggle-on .toggle-slider { background: #e65100; }
+.toggle-on .toggle-slider::after { left: 19px; }
+.toggle-on { border-color: #e65100; background: #fff3e0; }
+.toggle-label { font-size: 13px; font-weight: 600; }
+
+/* ===== Button ===== */
+.btn {
+  padding: 10px 20px;
+  background: #1565c0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.btn:hover:not(:disabled) { background: #0d47a1; }
+.btn:disabled { background: #90a4ae; cursor: not-allowed; }
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.source-bar {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.source-city {
+  font-weight: 400;
+  color: #333;
+}
+
+/* ===== Error ===== */
+.error-box {
+  background: #ffebee;
+  color: #b00020;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: 48px 16px;
+  color: rgba(255,255,255,0.85);
+}
+
+.empty-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-state p { font-size: 16px; }
+
+/* ===== 3-column grid ===== */
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ===== Forecast Card ===== */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.card:hover { transform: translateY(-4px); }
+
+.card-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-day {
+  font-weight: 700;
+  font-size: 14px;
+  color: #1565c0;
+}
+
+.card-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.card-icon { font-size: 52px; margin: 8px 0 16px; }
+
+.temps {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.temp-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.temp-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #999;
+}
+
+.temp-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.high .temp-value { color: #c62828; }
+.low .temp-value { color: #1565c0; }
+
+.temp-divider {
+  width: 1px;
+  height: 40px;
+  background: #eee;
+}
+
+.card-divider {
+  width: 100%;
+  border-top: 1px solid #f0f0f0;
+  margin-bottom: 14px;
+}
+
+/* ===== Advice pills ===== */
+.advice-section { width: 100%; }
+
+.advice-pill {
+  background: #e3f2fd;
+  color: #0d47a1;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.no-advice {
+  color: #2e7d32;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+  margin-top: 32px;
+}
+/* Condition badge in header */
+.condition-badge {
+  background: rgba(255,255,255,0.2);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+/* Smooth background transition when condition changes */
+.app-bg {
+  transition: background 1s ease;
 }
